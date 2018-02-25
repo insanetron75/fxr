@@ -1,1 +1,22 @@
+<head>
+  <%= stylesheet_link_tag "fxr.css" %>
+</head>
+
+<body>
 <h1>Hello Rails!</h1>
+<%= form_tag("/welcome/convert", method: "get") do %>
+  <%= label_tag(:date, "Date YYYY-MM-DD") %>
+  <%= text_field_tag(:date) %>
+
+  <%= label_tag(:base_cur, "Base Currency") %>
+  <%= text_field_tag(:base_cur) %>
+
+  <%= label_tag(:con_cur, "Counter Currency") %>
+  <%= text_field_tag(:con_cur) %>
+
+  <%= label_tag(:amount, "Amount") %>
+  <%= number_field_tag(:amount, nil, step: 0.01) %>
+
+  <%= submit_tag("Convert") %>
+<% end %>
+</body>
