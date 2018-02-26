@@ -3,7 +3,7 @@
 </head>
 
 <body>
-<h1>Hello Rails!</h1>
+<h1>Exchange Rates</h1>
 <%= form_tag("/welcome/convert", method: "get") do %>
   <%= label_tag(:date, "Date YYYY-MM-DD") %>
   <%= select_tag :date, options_for_select(@dates) %>
