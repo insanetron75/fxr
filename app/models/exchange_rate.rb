@@ -1,7 +1,9 @@
 require 'net/http'
 require "rexml/document"
+require "logger"
 
 class ExchangeRate < ApplicationRecord
+  $LOG = Logger.new("log/update_log_file.log", "monthly")
 
   def self.at(date, base_cur, con_cur)
     # Convert base_cur down to 1
@@ -13,17 +15,18 @@ class ExchangeRate < ApplicationRecord
   end
 
   def self.update_rates
-    puts "Updating Rates..."
+    $LOG.info "Updating Rates..."
 
-    puts "Getting Rates..."
+    $LOG.info "Getting Rates..."
     rates_hash = ExchangeRate.get_rates
-    puts "Done!"
+    $LOG.info rates_hash
+    $LOG.info "Done!"
 
-    puts "Saving Rates...."
+    $LOG.info "Saving Rates...."
     ExchangeRate.save_rates(rates_hash)
-    puts "Done!"
+    $LOG.info "Done!"
 
-    puts "Update Complete"
+    $LOG.info "Update Complete"
   end
 
   def self.get_rates
@@ -57,10 +60,12 @@ class ExchangeRate < ApplicationRecord
     rate_object = ExchangeRate.where(currency: cur, date: date)
     unless (!rate_object.empty?)
       # Create rate and return
+      $LOG.info "Creating Rate for #{cur} on #{date} at #{rate}"
       ExchangeRate.create(currency: cur, rate: rate, date: date)
       return true
     else
       # Rate already exists, return
+      $LOG.info "Rate already exists for #{cur} on #{date}, returning"
       return false
     end    
   end
