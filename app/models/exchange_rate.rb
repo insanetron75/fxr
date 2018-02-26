@@ -61,7 +61,7 @@ class ExchangeRate < ApplicationRecord
       return true
     else
       # Rate already exists, return
-      return true
+      return false
     end    
   end
 
