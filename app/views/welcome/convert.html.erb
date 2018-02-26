@@ -1,2 +1,24 @@
-<h1>Converted</h1>
+<head>
+  <%= stylesheet_link_tag "fxr.css" %>
+</head>
+
+<body>
+<h1>Hello Rails!</h1>
+<%= form_tag("/welcome/convert", method: "get") do %>
+  <%= label_tag(:date, "Date YYYY-MM-DD") %>
+  <%= select_tag :date, options_for_select(@dates, @date) %>
+
+  <%= label_tag(:base_cur, "Base Currency") %>
+  <%= select_tag :base_cur, options_for_select(@currencies, @base_cur) %>
+
+  <%= label_tag(:con_cur, "Counter Currency") %>
+  <%= select_tag :con_cur, options_for_select(@currencies, @con_cur) %>
+
+  <%= label_tag(:amount, "Amount") %>
+  <%= number_field_tag(:amount, @amount, step: 0.01) %>
+
+  <%= submit_tag("Convert") %>
+<% end %>
+</body>
+
 <h2><%= @message %> <h/2>

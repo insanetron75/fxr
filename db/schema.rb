@@ -20,10 +20,9 @@ ActiveRecord::Schema.define(version: 20180225190345) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "rates", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "currency"
     t.float "rate", limit: 24
-    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -64,4 +64,14 @@ class ExchangeRate < ApplicationRecord
       return true
     end    
   end
+
+  # Gets list of available currencies
+  def self.get_currencies
+    return ExchangeRate.distinct.pluck(:currency)
+  end
+
+  # Gets list of available dates
+  def self.get_dates
+    return ExchangeRate.distinct.pluck(:date)
+  end
 end
